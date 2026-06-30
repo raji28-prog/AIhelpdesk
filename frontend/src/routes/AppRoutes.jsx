@@ -1,6 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import RootLayout from '../layouts/RootLayout.jsx';
 import Home from '../pages/Home.jsx';
+import Login from '../pages/Login.jsx';
+import Register from '../pages/Register.jsx';
+import ProtectedRoute from '../components/ProtectedRoute.jsx';
 
 // Simple placeholder page for views that will be built in subsequent phases
 function PlaceholderPage({ title, description, badge }) {
@@ -24,28 +27,31 @@ export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<RootLayout />}>
-        {/* Main views */}
-        <Route index element={<Home />} />
-
-        {/* Placeholders for future phases */}
+        {/* Main views (Protected) */}
         <Route
-          path="login"
+          index
           element={
-            <PlaceholderPage
-              title="Secure JWT Login Gateway"
-              description="User, Support Agent, and Admin secure portal logic is part of Phase 2 (Authentication) roadmap."
-              badge="Phase 2 Feature"
-            />
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
           }
         />
+
+        {/* Public authentication views */}
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+
+        {/* Support and about placeholders */}
         <Route
           path="support"
           element={
-            <PlaceholderPage
-              title="Customer Support Desk"
-              description="Interactive FAQ search, chatbot widget, and ticket submission forms are scheduled for development in Phase 4 & 5."
-              badge="Phase 4 & 5 Feature"
-            />
+            <ProtectedRoute>
+              <PlaceholderPage
+                title="Customer Support Desk"
+                description="Interactive FAQ search, chatbot widget, and ticket submission forms are scheduled for development in Phase 4 & 5."
+                badge="Phase 4 & 5 Feature"
+              />
+            </ProtectedRoute>
           }
         />
         <Route

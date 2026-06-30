@@ -1,6 +1,9 @@
+import { useSelector } from 'react-redux';
 import { Bot, ChevronRight, Zap, Shield, HelpCircle, BarChart3, Users, Send } from 'lucide-react';
 
 export default function Home() {
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <div className="space-y-16 py-8">
       {/* Hero Section */}
@@ -8,7 +11,7 @@ export default function Home() {
         {/* Top Badge */}
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold tracking-wide animate-pulse">
           <Zap className="h-3 w-3" />
-          Introducing Phase 1 Foundation
+          {user ? `Logged in as ${user.name} (${user.role})` : 'Introducing Phase 1 Foundation'}
         </div>
 
         {/* Main Title */}

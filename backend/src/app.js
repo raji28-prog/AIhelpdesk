@@ -1,6 +1,8 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
+import fastifyJwt from '@fastify/jwt';
 import healthRoutes from './routes/health.js';
+import authRoutes from './routes/authRoutes.js';
 
 /**
  * Initializes and configures the Fastify app.
@@ -14,8 +16,14 @@ export const buildApp = async (options = {}) => {
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   });
 
+  // Register JWT Plugin
+  await fastify.register(fastifyJwt, {
+    secret: process.env.JWT_SECRET || 'default_secret_for_local_dev_only_replace_in_production',
+  });
+
   // Register Routes
   await fastify.register(healthRoutes);
+  await fastify.register(authRoutes, { prefix: '/api/auth' });
 
   // Custom 404 handler
   fastify.setNotFoundHandler((request, reply) => {
