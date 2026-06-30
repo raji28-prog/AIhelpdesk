@@ -1,0 +1,29 @@
+{
+  "name": "ai-smart-helpdesk-backend",
+  "version": "1.0.0",
+  "description": "Fastify backend for AI Smart Helpdesk Assistant",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "keywords": [
+    "fastify",
+    "helpdesk",
+    "support",
+    "ai"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^10.0.1",
+    "dotenv": "^16.4.5",
+    "fastify": "^5.2.0",
+    "mongoose": "^8.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "pino-pretty": "^13.1.3"
+  }
+}
